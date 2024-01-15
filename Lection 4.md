@@ -11,3 +11,8 @@ creamos las funciones y ahora funciona
 
 para que funcionela comprobacion por pytest necesitamos crear scripts __init__ 
 pytest tests/test_simple_functions.py
+
+pytest tests/test_load_dataset.py
+
+python -m unittest
+

@@ -63,6 +63,15 @@ class filter_data:
         
         price = float(price)
         return self.df[self.df['Price Starting With ($)'] > price]
+ 
+def load_dataset(filename):
+
+    extension = filename.rsplit(".",1)[-1]
+    if extension == "csv":
+        return pd.read_csv(filename)
+    else:
+        raise TypeError(f"\n\n\n\n\n\nThe extension is {extension} and not CSV, please try again!\n\n\n\n\n\n")
+
 
 @click.command(short_help='Parser to manage inputs for BooksDataset')#info
 @click.option('-id','--input_data', required=True, help='Path to my input dataset')#
@@ -84,7 +93,7 @@ def main(input_data, output, filtering, price, month, year,name):
     print("\n\n\n")
 
     try:
-        df = pd.read_csv(input_data, sep=',')
+        df = load_dataset(input_data, sep=',')
     except FileNotFoundError as e:
         raise FileNotFoundError(f"\n\n\n\n\n\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!CAUTION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n\n\n\n\n\n FILE COULDN'T BE FOUND: {e}\n\n\n\n")
 
