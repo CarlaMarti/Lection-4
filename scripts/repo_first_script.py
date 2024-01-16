@@ -30,39 +30,8 @@
 import os
 import click
 import pandas as pd 
+from filtering_data import filter_data
 
-class filter_data:
-    """
-    Class to filter data by year and month of publication.
-    """
-    def __init__(self, df): 
-        """
-        En resumen, este constructor está diseñado para aceptar un DataFrame (df) como argumento y asignarlo al atributo df del objeto. 
-        Este es un patrón común en la programación orientada a objetos cuando se desea inicializar el estado de un objeto con valores específicos al crearlo.
-        """
-        self.df = df    
-
-    def filter_by_year(self, year):
-        """
-        Filter books by a given minimum year.
-        """
-        
-        year = int(year)
-        return self.df[self.df['Publish Date (Year)'] > year]
-    
-    def filter_by_month(self, month):
-        """
-        Filter books by a given month.
-        """
-        return self.df[self.df['Publish Date (Month)'] == month]
-    
-    def filter_by_price(self, price):
-        """
-        Filter books by a given minimum price.
-        """
-        
-        price = float(price)
-        return self.df[self.df['Price Starting With ($)'] > price]
  
 def load_dataset(filename):
 
@@ -93,7 +62,7 @@ def main(input_data, output, filtering, price, month, year,name):
     print("\n\n\n")
 
     try:
-        df = load_dataset(input_data, sep=',')
+        df = load_dataset(input_data)
     except FileNotFoundError as e:
         raise FileNotFoundError(f"\n\n\n\n\n\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!CAUTION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n\n\n\n\n\n FILE COULDN'T BE FOUND: {e}\n\n\n\n")
 
@@ -106,32 +75,21 @@ def main(input_data, output, filtering, price, month, year,name):
         filter_obj = filter_data(df)  # Create a single instance of filter_data
 
         if year:
-            df = filter_obj.filter_by_year(year)
+            df = filter_obj(year)
         
         if month:
-            df = filter_obj.filter_by_month(month) 
+            df = filter_obj(month) 
         
         if price:
-            df = filter_obj.filter_by_price(price)
+            df = filter_obj(price)
         
-        # df = filter_data(df).filter_by_price(price) 
-                    
-        # df = df[df['Publish Date (Month)']=='January']
-        # df = df[df['Publish Date (Year)'] > 2020]
-
+       
         print("DATA SAVED! SHAPE OF THE NEW DATASET:      ",df.shape,"\n\n\n")
-           
-            # debugger
-            #import pdb;pdb.set_trace()  --> no lo uso porque de momento todo funciona y prefiero que no se esté parando todo el rato
-            # I have everything available before that
-            #Una vez se te ha parado puedes poner q(para quit) o c (para continuar)
-
     
     if not os.path.exists(output):              #if the directory output is not found, we will generate one called as the user said
         os.makedirs(output)
     
-    df.to_csv(f'{output}/{name}.csv', index=None)
-    #we save the file where we want (output) or it will save it in "outputs"
+    df.to_csv(f'{output}/{name}.csv', index=None) #we save the file where we want (output) or it will save it in "outputs"
 
     
 
