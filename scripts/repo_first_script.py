@@ -1,13 +1,8 @@
-#options:
-
-#to choose the dataset in which you want to work: -id BooksDatasetClean.csv 
-#if I want to save it in a given folder: -o NameofFolder
-    #(if I want to save it in a new folder: -o NewName)
-
 #COMAND LINE OPTIONS
 
 #if I want to work on a given dataset: -id NameDataset
-#if I want to save the result in a given folder: -o NameofFolder
+#if I want to save the result in a given folder: -o NameofFolder   
+   #(if I want to save it in a new folder: -o NewName)
 #if I want to filter: -f
 #if I want to filter by year: -y 2003
 #if I want to filter by month: -m July
@@ -16,6 +11,8 @@
 #if I want to filter by number of tickets sold: -t number
 #if I want to filter by all at once: -y 2003 -m July -p 4.8
 #if I want to name the filtered data in a given way: -n name
+
+#if I want to see the options: --help
 
 #examples (all included):
 
@@ -31,8 +28,8 @@ import pandas as pd
 from filtering_data import filter_data
 from loading_datasets import load_dataset
  
-@click.command(short_help='Parser to manage inputs for BooksDataset')#info
-@click.option('-id','--input_data', required=True, help='Path to my input dataset')#
+@click.command(short_help='Parser to manage inputs for BooksDataset')
+@click.option('-id','--input_data', required=True, help='Path to my input dataset')
 @click.option('-o','--output', default="outputs", help="Folder to save all outputs")
 @click.option('-f','--filtering', is_flag=True, help="Set a filtering or not")
 @click.option('-p', '--price', help = "Set a minimum price like this: 5.29")
@@ -56,8 +53,6 @@ def main(input_data, output, filtering, price, month, year, genre, name, tickets
         raise FileNotFoundError(f"\n\n\n\n\n\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!CAUTION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n\n\n\n\n\n FILE COULDN'T BE FOUND: {e}\n\n\n\n")
 
     print("HERE YOU HAVE A SAMPLE!\n\n\n",df.sample())
-
-
 
     if filtering:
         print("\n\n\nI AM FILTERING!\n\n\n")
