@@ -29,17 +29,8 @@ import os
 import click
 import pandas as pd 
 from filtering_data import filter_data
-
+from loading_datasets import load_dataset
  
-def load_dataset(filename):
-
-    extension = filename.rsplit(".",1)[-1]
-    if extension == "csv":
-        return pd.read_csv(filename)
-    else:
-        raise TypeError(f"\n\n\n\n\n\nThe extension is {extension} and not CSV, please try again!\n\n\n\n\n\n")
-
-
 @click.command(short_help='Parser to manage inputs for BooksDataset')#info
 @click.option('-id','--input_data', required=True, help='Path to my input dataset')#
 @click.option('-o','--output', default="outputs", help="Folder to save all outputs")
