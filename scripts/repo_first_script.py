@@ -1,31 +1,29 @@
-#NOTES IN CLASS (SOME OF THEM COMMENTED TO AVOID INTERRRUPTING THE CODE)
-#HOMEWORK INCLUDED
-#EXTRA: YOU CAN SAVE THE RESULTING DATA WITH THE NAME YOU WANT
-
-
-# first : I must activate the environment, opening anaconda etc --> conda activate advancedpython24 
-# second: open the script --> python script_class_2.py 
-# then I add the options I want -id or -name or ...
-
-# in case of wanting to know the options available --> python script_class_2.py --help
-
 #options:
 
 #to choose the dataset in which you want to work: -id BooksDatasetClean.csv 
 #if I want to save it in a given folder: -o NameofFolder
     #(if I want to save it in a new folder: -o NewName)
 
+#COMAND LINE OPTIONS
+
+#if I want to work on a given dataset: -id NameDataset
+#if I want to save the result in a given folder: -o NameofFolder
 #if I want to filter: -f
 #if I want to filter by year: -y 2003
 #if I want to filter by month: -m July
 #if I want to filter by price: -p 4.8
+#if I want to filter by genre: -g Action
+#if I want to filter by number of tickets sold: -t number
 #if I want to filter by all at once: -y 2003 -m July -p 4.8
+#if I want to name the filtered data in a given way: -n name
 
-#extra: if I want to name the filtered data in a given way: -n name
+#examples (all included):
 
-#example:
-
+# DATASET 1:
 #python scripts/repo_first_script.py -id datasets/BooksDatasetClean.csv -f -y 2000 -m July -p 5.8 -n holaquetal -o NUEVACARPETA
+
+#DATASET 2:
+#python scripts/repo_first_script.py -id datasets/FilmGenreStats.csv -f -y 2000 -g Action -n holaquetal -o NUEVACARPETA
 
 import os
 import click
@@ -49,11 +47,11 @@ def load_dataset(filename):
 @click.option('-p', '--price', help = "Set a minimum price like this: 5.29")
 @click.option('-m', '--month', help = "Set a month (you have to write the month like this: July)")
 @click.option('-y', '--year', help = "Set a year (you have to write it like this: 2002)")
+@click.option('-g', "--genre", help="Set a genre (you have to write the genre like this: Action)")
+@click.option('-t', "--tickets_sold", help="Set a minimum number of tickets sold (you have to write the genre like this: 2889395823)")
+@click.option('-n', '--name', help = "Set a name to your result")
 
-#extra:
-@click.option('-n', '--name', help = "Set a name to your result!")
-
-def main(input_data, output, filtering, price, month, year,name):
+def main(input_data, output, filtering, price, month, year, genre, name, tickets_sold):
     """
     Deal with the input data and send to other functions, in this case inside the class filter_data.
     """
@@ -66,7 +64,7 @@ def main(input_data, output, filtering, price, month, year,name):
     except FileNotFoundError as e:
         raise FileNotFoundError(f"\n\n\n\n\n\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!CAUTION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n\n\n\n\n\n FILE COULDN'T BE FOUND: {e}\n\n\n\n")
 
-    print("HERE YOU HAVE A SAMPLE!\n\n\n",df[['Title', 'Price Starting With ($)', 'Publish Date (Month)', 'Publish Date (Year)']].sample())
+    print("HERE YOU HAVE A SAMPLE!\n\n\n",df.sample())
 
 
 
@@ -84,15 +82,23 @@ def main(input_data, output, filtering, price, month, year,name):
         if price:
             df = filter_obj.filter_by_price(price)
         
+        if genre:
+            df = filter_obj.filter_by_genre(genre) 
+        
+        if tickets_sold:
+            df = filter_obj.filter_by_tickets(tickets_sold) 
+    
        
         print("DATA SAVED! SHAPE OF THE NEW DATASET:      ",df.shape,"\n\n\n")
     
-    if not os.path.exists(output):              #if the directory output is not found, we will generate one called as the user said
+#if the directory output is not found, we will generate one called as the user said
+        
+    if not os.path.exists(output):              
         os.makedirs(output)
     
-    df.to_csv(f'{output}/{name}.csv', index=None) #we save the file where we want (output) or it will save it in "outputs"
+    # we save the file where the user wants (output) or it will save it in "outputs"
 
-    
+    df.to_csv(f'{output}/{name}.csv', index=None) 
 
 if __name__ == '__main__':
     print('\n\n\nTHIS IS WORKING!!\n\n\n')
