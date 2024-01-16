@@ -45,8 +45,6 @@ class filter_data:
         Filter a minimum number of tickets sold.
         """
         return self.df[self.df['Tickets Sold'] > float(tickets_sold)]
-    
-        #ARREGLAR
          
 
 if __name__ == "__main__":
