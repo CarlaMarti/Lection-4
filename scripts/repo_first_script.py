@@ -25,7 +25,7 @@
 
 #example:
 
-#python script_lection2.py -id BooksDatasetClean.csv -f -y 2000 -m July -p 5.8 -n holaquetal -o NUEVACARPETA
+#python scripts/repo_first_script.py -id datasets/BooksDatasetClean.csv -f -y 2000 -m July -p 5.8 -n holaquetal -o NUEVACARPETA
 
 import os
 import click
@@ -72,16 +72,17 @@ def main(input_data, output, filtering, price, month, year,name):
 
     if filtering:
         print("\n\n\nI AM FILTERING!\n\n\n")
+        
         filter_obj = filter_data(df)  # Create a single instance of filter_data
 
         if year:
-            df = filter_obj(year)
+            df = filter_obj.filter_by_year(year)
         
         if month:
-            df = filter_obj(month) 
+            df = filter_obj.filter_by_month(month) 
         
         if price:
-            df = filter_obj(price)
+            df = filter_obj.filter_by_price(price)
         
        
         print("DATA SAVED! SHAPE OF THE NEW DATASET:      ",df.shape,"\n\n\n")
