@@ -27,6 +27,7 @@ import click
 import pandas as pd 
 from filtering_data import filter_data
 from loading_datasets import load_dataset
+from cleaning_data import clean_dataframe
  
 @click.command(short_help='Parser to manage inputs for BooksDataset')
 @click.option('-id','--input_data', required=True, help='Path to my input dataset')
@@ -68,16 +69,8 @@ def main(input_data, output, filtering, price, month, year, genre, name, tickets
 
     if cleaning:
         
-        print("\n\n\nI AM CLEANING!")
+        df = clean_dataframe(df) #funcion testeada 
         
-        df_cleaned = df.dropna()
-
-        df_cleaned = df_cleaned.drop_duplicates()
-
-        df = df_cleaned
-
-        print("\n\n\nNew number of rows: ", len(df))
-
 
     if filtering:
         print("\n\n\nI AM FILTERING!\n")
@@ -105,7 +98,7 @@ def main(input_data, output, filtering, price, month, year, genre, name, tickets
             print("\n\nNumber of rows (tickets sold filter):      ", len(df))
     
        
-        print("DATA SAVED! \n\nTotal number of rows:      ", df.shape)
+        print("\n\n\nDATA SAVED! \n\nTotal number of rows:      ", df.shape)
     
 #if the directory output is not found, we will generate one called as the user said
         
@@ -117,5 +110,5 @@ def main(input_data, output, filtering, price, month, year, genre, name, tickets
     df.to_csv(f'{output}/{name}.csv', index=None) 
 
 if __name__ == '__main__':
-    print('\n\n\nTHIS IS WORKING!!\n\n\n')
+    print('\n\n_______________________________________________________________________________\nTHIS IS WORKING!!\n\n\n')
     main()
