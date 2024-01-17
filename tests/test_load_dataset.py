@@ -5,6 +5,7 @@ Test loading of the dataset
 import unittest
 from scripts.loading_datasets import load_dataset
 
+
 class TestDataset(unittest.TestCase):
     """
     Class to test the dataset input in different ways

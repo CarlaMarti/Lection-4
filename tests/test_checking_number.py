@@ -1,5 +1,6 @@
 import unittest
-from scripts.checking_number import is_number  
+from scripts.checking_number import is_number
+
 
 class TestIsNumber(unittest.TestCase):
     """
@@ -41,5 +42,6 @@ class TestIsNumber(unittest.TestCase):
         a_list = [1, 2, 3]
         self.assertFalse(is_number(a_list))
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()
