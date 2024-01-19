@@ -177,3 +177,13 @@ tests directory (0 comments):
 scripts directory (0 comments):
 
     flake8 scripts
+
+### GitHub Actions 
+
+Activated for this branch (exercise_class_5) and had a tick (only testing).
+
+Activated the action of linting with flake8, also got the tick (linting with flake8 too!).
+
+### Makefile
+
+I tried to install make (Makefile) for windows with the link you gave us but couldn't open any .sig file (the ones we had to download and open to install make).
