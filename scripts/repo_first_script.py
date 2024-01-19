@@ -35,17 +35,11 @@ from cleaning_data import clean_dataframe
 @click.option("-o", "--output", default="outputs", help="Folder to save all outputs")
 @click.option("-f", "--filtering", is_flag=True, help="Set a filtering or not")
 @click.option("-p", "--price", help="Set a minimum price like this: 5.29")
+@click.option("-m", "--month", help="Set a month (example: July)")
+@click.option("-y", "--year", help="Set a year (example: 2002)")
+@click.option("-g", "--genre", help="Set a genre (example: Action)")
 @click.option(
-    "-m", "--month", help="Set a month (you have to write the month like this: July)"
-)
-@click.option("-y", "--year", help="Set a year (you have to write it like this: 2002)")
-@click.option(
-    "-g", "--genre", help="Set a genre (you have to write the genre like this: Action)"
-)
-@click.option(
-    "-t",
-    "--tickets_sold",
-    help="Set a minimum number of tickets sold (you have to write the genre like this: 2889395823)",
+    "-t", "--tickets_sold", help="Set a number of tickets sold (example: 2889395823)"
 )
 @click.option("-n", "--name", help="Set a name to your result")
 @click.option("-c", "--cleaning", is_flag=True, help="Clean the dataset or not")
@@ -62,7 +56,8 @@ def main(
     cleaning,
 ):
     """
-    Deal with the input data and send to other functions, in this case inside the class filter_data.
+    Deal with the input data and send to other functions.
+    In this case, inside the class filter_data.
     """
 
     print("WE WILL BE WORKING WITH THIS DATASET:", input_data)
@@ -72,7 +67,7 @@ def main(
         df = load_dataset(input_data)
     except FileNotFoundError as e:
         raise FileNotFoundError(
-            f"\n\n\n\n\n\n!!!!!!!!!CAUTION!!!!!!!!!\n\n\n\n\n\n FILE COULDN'T BE FOUND: {e}\n\n\n\n"
+            f"\n\n\n!!!!!!CAUTION!!!!!!\n\n\n FILE COULDN'T BE FOUND: {e}\n\n\n\n"
         )
 
     print("Sample of the dataframe:\n\n\n", df.sample(3))
