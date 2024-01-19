@@ -1,4 +1,13 @@
+"""
+Cleans data
+(10/10)
+"""
+
 def clean_dataframe(df):
+    """
+    The function that cleans a given a dataframe
+    """
+
     print("\n\n\nI AM CLEANING!")
 
     df_cleaned = df.dropna()

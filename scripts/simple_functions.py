@@ -1,5 +1,6 @@
 """
 Script to write and substract simple functions
+10/10 pylint
 """
 
 

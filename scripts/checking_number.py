@@ -1,3 +1,7 @@
+"""
+Checks if a value is a number
+(10/10)
+"""
 import unittest
 
 
