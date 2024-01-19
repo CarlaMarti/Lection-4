@@ -4,14 +4,13 @@ import click
 import pandas as pd
 from filtering_data import FilterData
 
+
 # Click command and options
 @click.command(short_help="Parser to manage inputs for BooksDataset")
-@click.option("-id", "--input_data", required=True, help="Path to the input dataset")
-@click.option("-o", "--output", default="outputs", help="Folder to save all outputs")
+@click.option("-id", "--input_data", required=True, help="Path to dataset")
+@click.option("-o", "--output", default="outputs", help="Folder")
 @click.option("-f", "--filtering", is_flag=True, help="Enable filtering")
 @click.option("-y", "--year", help="Set a year (e.g., 2002)")
-
-# Main function
 def main(input_data, output, filtering, year):
     """
     Deal with the input data and send it to other functions.

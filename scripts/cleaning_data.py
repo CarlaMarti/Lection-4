@@ -3,6 +3,7 @@ Cleans data
 (10/10)
 """
 
+
 def clean_dataframe(df):
     """
     The function that cleans a given a dataframe

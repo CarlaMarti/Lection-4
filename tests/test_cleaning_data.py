@@ -17,7 +17,8 @@ class TestCleanDataFrame(unittest.TestCase):
         """
         Set Up Testing DataFrame
         """
-        data = {"Column1": [1, 2, 3, None, 2], "Column2": ["A", "B", "C", "D", "B"]}
+        data = {"Column1": [1, 2, 3, None, 2],
+                "Column2": ["A", "B", "C", "D", "B"]}
         self.df = pd.DataFrame(data)
 
     def test_dropna(self):

@@ -2,6 +2,8 @@
 Script with class filter_data
 (10/10)
 """
+
+
 class FilterData:
     """
     Class to filter data by year and month of publication.
@@ -9,7 +11,7 @@ class FilterData:
 
     def __init__(self, df):
         """
-        Aceptar un DataFrame (df) como argumento y asignarlo al atributo df del objeto.
+        Aceptar un DataFrame (df)
         """
         self.df = df
 
