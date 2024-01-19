@@ -1,5 +1,6 @@
 """
 Test loading of the dataset
+(10/10)
 """
 
 import unittest

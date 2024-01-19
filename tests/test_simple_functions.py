@@ -1,5 +1,6 @@
 """
 Script to write the test for the sum and substract simple functions
+(10/10)
 """
 import unittest
 

@@ -1,16 +1,21 @@
-class filter_data:
+"""
+Script with class filter_data
+(10/10)
+"""
+
+
+class FilterData:
     """
     Class to filter data by year and month of publication.
     """
 
     def __init__(self, df):
         """
-        Aceptar un DataFrame (df) como argumento y asignarlo al atributo df del objeto.
+        Aceptar un DataFrame (df)
         """
         self.df = df
 
-    # In both datasets you can filter by year, the issue here is that the columns are called differently
-    # I solved this issue with the following code:
+    # In both datasets you can filter by year
 
     def filter_by_year(self, year):
         """
