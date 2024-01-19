@@ -1,3 +1,7 @@
+"""
+Test of checking_number function
+(10/10)
+"""
 import unittest
 from scripts.checking_number import is_number
 
